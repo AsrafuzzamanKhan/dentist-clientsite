@@ -1,0 +1,8 @@
+.backgroundImg {
+    background-image: url('../../../assets/images/bg.png');
+    padding: 25px;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    border-radius: 5px;
+
+}
