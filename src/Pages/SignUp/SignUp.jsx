@@ -2,33 +2,54 @@ import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
+import { toast } from 'react-hot-toast';
 
-const Login = () => {
+const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
-    const { signIn } = useContext(AuthContext);
+    const [signUpErr, setSignUpErr] = useState('')
 
-    const [loginError, setLoginError] = useState('')
-    const handleLogin = data => {
-        console.log(data);
-        setLoginError('')
-        signIn(data.email, data.password)
+    const { createUser, updateUser } = useContext(AuthContext)
+    const handleSignUp = data => {
+        console.log(data)
+        setSignUpErr('')
+        createUser(data.email, data.password)
             .then(result => {
                 const user = result.user;
                 console.log(user);
+                toast("User created Successfully")
+                const userInfo = {
+                    displayName: data.name
+                }
+                updateUser(userInfo)
+                    .then(() => { })
+                    .catch(err => console.log(err))
             })
-            .catch(err => {
-                setLoginError(err.message)
-                console.log(err.message)
-            });
+            .catch(errors => {
+                console.log(errors.message)
+                setSignUpErr(errors.message)
+            })
     }
+
     return (
         <div className='h-[800px] flex justify-center items-center'>
             <div className='w-96 p-7'>
-                <h2 className='text-xl text-center my-2'>Login</h2>
-                <form onSubmit={handleSubmit(handleLogin)}>
+                <h2 className='text-xl text-center my-2'>Sign up</h2>
+                <form onSubmit={handleSubmit(handleSignUp)}>
 
 
 
+                    <div className="form-control w-full max-w-xs">
+                        <label className="label">
+                            <span className="label-text">Name</span>
+                        </label>
+                        <input className="input input-bordered w-full max-w-xs"
+                            type="text"
+                            {...register("name", {
+                                required: "Name is required",
+                            })}
+                            placeholder="Name" />
+                    </div>
+                    {errors.name && <p className='text-red-600'>{errors.name?.message}</p>}
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Email</span>
@@ -53,18 +74,17 @@ const Login = () => {
                                     value: 6,
                                     message: "Password must be at least 6 characters long",
                                 },
+                                pattern: { value: /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/, message: 'Password must be contain least one number & one special character' }
                             })}
                             placeholder="Password" />
-                        <label className="label">
-                            <span className="label-text">Forget Password</span>
-                        </label>
+
                     </div>
                     {errors.password && <p className='text-red-600'>{errors.password?.message}</p>}
-                    {loginError && <p className='text-red-600'>{loginError}</p>}
-
-                    <input className='btn btn-accent w-full' type="submit" value='Login' />
+                    {signUpErr && <p className='text-red-600'>{signUpErr}</p>
+                    }
+                    <input className='btn btn-accent w-full my-3' type="submit" value='Sign up' />
                 </form>
-                <p>New to Dentist site? <Link className='text-secondary' to='/signup'>Create an Account</Link></p>
+                <p>Already have an Account ? <Link className='text-secondary' to='/login'> Please Login</Link></p>
                 <div className="divider">OR</div>
                 <button className='btn btn-outline uppercase w-full'>Continue with google</button>
             </div>
@@ -72,4 +92,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignUp;
