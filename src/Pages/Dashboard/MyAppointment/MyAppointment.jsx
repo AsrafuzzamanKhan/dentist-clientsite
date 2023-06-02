@@ -25,8 +25,8 @@ const MyAppointment = () => {
     return (
         <div>
             <h3 className="text-3xl mb-5">My Appointments</h3>
-            <div class="overflow-x-auto">
-                <table class="table w-full">
+            <div className="overflow-x-auto">
+                <table className="table w-full">
                     {/* <!-- head --> */}
                     <thead>
                         <tr>
@@ -38,16 +38,18 @@ const MyAppointment = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {bookings.map((booking, index) => <tr
-                            key={index}
-                        >
-                            <th>{index + 1}</th>
-                            <td>{booking.patient}</td>
-                            <td>{booking.treatment}</td>
-                            <td>{booking.appointmentDate}</td>
-                            <td>{booking.slot}</td>
+                        {
 
-                        </tr>)}
+                            bookings?.map((booking, index) => <tr
+                                key={index}
+                            >
+                                <th>{index + 1}</th>
+                                <td>{booking.patient}</td>
+                                <td>{booking.treatment}</td>
+                                <td>{booking.appointmentDate}</td>
+                                <td>{booking.slot}</td>
+
+                            </tr>)}
 
 
                     </tbody>

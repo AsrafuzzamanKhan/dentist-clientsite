@@ -72,8 +72,6 @@ const SignUp = () => {
                 <h2 className='text-xl text-center my-2'>Sign up</h2>
                 <form onSubmit={handleSubmit(handleSignUp)}>
 
-
-
                     <div className="form-control w-full max-w-xs">
                         <label className="label">
                             <span className="label-text">Name</span>
