@@ -3,13 +3,20 @@ import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../contexts/AuthProvider';
 import { toast } from 'react-hot-toast';
+import useToken from '../../hooks/useToken'
 
 const SignUp = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
+    const { createUser, updateUser } = useContext(AuthContext)
     const [signUpErr, setSignUpErr] = useState('')
+    const [createdUserEmail, setCreatedUSerEmail] = useState('')
+    const [token] = useToken(createdUserEmail)
     const navigate = useNavigate()
 
-    const { createUser, updateUser } = useContext(AuthContext)
+
+    if (token) {
+        navigate('/')
+    }
     const handleSignUp = data => {
         console.log(data)
         setSignUpErr('')
@@ -23,13 +30,39 @@ const SignUp = () => {
                 }
                 updateUser(userInfo)
                     .then(() => {
-                        navigate('/')
+                        saveUserDB(data.name, data.email)
                     })
                     .catch(err => console.log(err))
             })
             .catch(errors => {
                 console.log(errors.message)
                 setSignUpErr(errors.message)
+            })
+    }
+
+    const saveUserDB = (name, email) => {
+        const user = { name, email };
+        fetch('http://localhost:5000/users', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(user)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log('Save user to DB', data)
+                setCreatedUSerEmail(email)
+            })
+    }
+    const getUserToken = email => {
+        fetch(`http://localhost:5000/jwt?email=${email}`)
+            .then(res => res.json())
+            .then(data => {
+                if (data.accessToken) {
+                    localStorage.setItem('accessToken', data.accessToken);
+                    navigate('/')
+                }
             })
     }
 

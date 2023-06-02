@@ -9,6 +9,8 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
     const date = format(selectedDate, "PP")
 
     const { user } = useContext(AuthContext)
+
+
     const handleBooking = event => {
         event.preventDefault();
         const form = event.target;
@@ -40,9 +42,12 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
             .then(data => {
                 console.log(data)
                 if (data.acknowledged) {
-                    toast.success("Booking Confirmed")
                     setTreatment(null)
+                    toast.success("Booking Confirmed")
                     refetch()
+                }
+                else {
+                    toast.error(data.message)
                 }
             })
 
