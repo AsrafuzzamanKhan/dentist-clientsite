@@ -32,7 +32,7 @@ const BookingModal = ({ treatment, selectedDate, setTreatment, refetch }) => {
         // once data is save diplay toste 
         console.log(booking)
 
-        fetch('http://localhost:5000/bookings', {
+        fetch('https://dentist-serversite.vercel.app/bookings', {
             method: "POST",
             headers: {
                 'content-type': "application/json"

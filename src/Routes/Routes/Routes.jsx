@@ -71,10 +71,8 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/dashboard/payment/:id',
-                element: <AdminRoute>
-                    <Payment></Payment>
-                </AdminRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/booking/${params.id}`)
+                element: <Payment></Payment>,
+                loader: ({ params }) => fetch(`https://dentist-serversite.vercel.app/booking/${params.id}`)
 
 
             }

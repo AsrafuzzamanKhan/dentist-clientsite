@@ -12,13 +12,13 @@ const AvailableAppointment = ({ selectedDate }) => {
     const { data: appointmentOptions = [], refetch, isLoading } = useQuery(
         {
             queryKey: ['appointmentOptions', date],
-            queryFn: () => fetch(`http://localhost:5000/v2/appointmentOptions?date=${date}`)
+            queryFn: () => fetch(`https://dentist-serversite.vercel.app/v2/appointmentOptions?date=${date}`)
                 .then(res => res.json())
         }
     )
 
     // useEffect(() => {
-    //     fetch('http://localhost:5000/appointmentOptions')
+    //     fetch('https://dentist-serversite.vercel.app/appointmentOptions')
     //         .then(res => res.json())
     //         .then(data => setAppointmentOptions(data))
     // }, [])
