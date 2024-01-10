@@ -8,18 +8,18 @@ const DashboardLayout = () => {
     const { user } = useContext(AuthContext)
     const [isAdmin] = useAdmin(user?.email)
     return (
-        <div>
+        <div className='pt-28'>
             <Navbar></Navbar>
-            <div class="drawer drawer-mobile">
-                <input id="dashboard-drawer" type="checkbox" class="drawer-toggle" />
-                <div class="drawer-content ">
+            <div className="drawer drawer-mobile">
+                <input id="dashboard-drawer" type="checkbox" className="drawer-toggle" />
+                <div className="drawer-content ">
                     <Outlet></Outlet>
 
 
                 </div>
-                <div class="drawer-side">
-                    <label htmlFor="dashboard-drawer" class="drawer-overlay"></label>
-                    <ul class="menu p-4 w-80 h-full  text-base-content">
+                <div className="drawer-side">
+                    <label htmlFor="dashboard-drawer" className="drawer-overlay"></label>
+                    <ul className="menu p-4 w-80 h-full  text-base-content">
                         {/* <!-- Sidebar content here --> */}
                         <li><Link to='/dashboard'>My Appointment</Link></li>
                         {

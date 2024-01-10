@@ -27,22 +27,24 @@ const Services = () => {
 
     ]
     return (
-        <div className=' w-100'>
-            <div className='my-8  text-center'>
-                <h5 className='text-primary text-xl font-semibold uppercase'>Our Services</h5>
-                <h2 className='text-4xl'>Services We Provide</h2>
-            </div>
-            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-8'>
-                {
-                    serviceData.map(service => <Service
-                        key={service.id}
-                        service={service}
-                    ></Service>
+        <div className=''>
+            <div className='container mx-auto'>
+                <div className='my-8  text-center gap-y-[10px]'>
+                    <h5 className='text-primary text-xl font-semibold uppercase mb-5'>Our Services</h5>
+                    <h2 className='text-4xl'>Services We Provide</h2>
+                </div>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 my-8'>
+                    {
+                        serviceData.map(service => <Service
+                            key={service.id}
+                            service={service}
+                        ></Service>
 
-                    )
-                }
-            </div>
+                        )
+                    }
+                </div>
 
+            </div>
         </div>
     );
 };

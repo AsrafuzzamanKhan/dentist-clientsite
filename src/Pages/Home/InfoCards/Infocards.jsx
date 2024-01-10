@@ -28,13 +28,15 @@ const Infocards = () => {
         },
     ]
     return (
-        <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8'>
-            {
-                cardData.map(card => <InfoCard
-                    key={card.id}
-                    card={card}
-                ></InfoCard>)
-            }
+        <div className='container mx-auto'>
+            <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-8'>
+                {
+                    cardData.map(card => <InfoCard
+                        key={card.id}
+                        card={card}
+                    ></InfoCard>)
+                }
+            </div>
         </div>
     );
 };

@@ -5,7 +5,7 @@ import AvailableAppointment from '../AvailableAppointments/AvailableAppointment'
 const Appointment = () => {
     const [selectedDate, setSelectedDate] = useState(new Date())
     return (
-        <div>
+        <div className='container mx-auto'>
             <AppointmentBanner
                 selectedDate={selectedDate}
                 setSelectedDate={setSelectedDate}
